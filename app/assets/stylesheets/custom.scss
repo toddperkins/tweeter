@@ -1,5 +1,6 @@
 .topnav {
 	margin-top: 15px;
+	margin-bottom: 15px;
 	padding: 8px 8px 8px 8px;
 	background-color: #F2F2F2;
 	.menu-items {
@@ -20,4 +21,16 @@
 .home-logo {
 	display:block;
   margin: 35px auto;
+}
+
+.tweet {
+	border-bottom: 1px solid #DFDFDF;
+	font-size: 12px;
+	margin-bottom: 15px;
+}
+
+.user-info {
+	padding: 13px;
+	background-color: #F2F2F2;
+	margin-bottom: 15px;
 }
