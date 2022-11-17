@@ -16,24 +16,60 @@
 
   <body>
 
+    <header>
+      <div class="container topnav">
+        <div class="row">
+          <div class="col-6">
+            <img src="/assets/logo.png">
+          </div>
+          <div class="col-6 menu-items">
+            <% if user_signed_in? %>
+              <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => '' %>
+            <% else %>
+              <a href="/users/sign_in">Sign In</a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </header>
+
     <div class="container">
-      <img src="/assets/logo.png" class="home-logo">
-      <div class="row justify-content-md-center">
-        <div class="col col-lg-6">
+      <div class="row">
+        <div class="col-3">
+          <div class="row user-info">
+            <%= current_user.first_name %> <%= current_user.last_name %><br />
+            <%= current_user.handle %>
+          </div>
+          <div class="row">
+            <ul class="sidenav">
+              <li><a href="/">Home</a></li>
+              <li><a href="/users/edit">Profile</a></li>
+              <li><a href="#">Explore</a></li>
+              <li><a href="#">Messages</a></li>
+              <li><a href="#">Bookmarks</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <%= yield %>
+        
+        <div class="col-3">
           
-          <% if notice %>
-            <div class="alert alert-info" role="alert">
-              <%= notice %>
-            </div>
+          <h2>Following</h2>
+          <% @following.each do |f| %>
+            <p>
+              <%= f.first_name %> <%= f.last_name %>
+              <%= f.handle %>
+            </p>
           <% end %>
 
-          <% if alert %>
-            <div class="alert alert-warning" role="alert">
-              <%= alert %>
-            </div>
+          <h2>Suggested Users</h2>
+          <% @not_following.each do |nf| %>
+            <p>
+              <%= nf.first_name %> <%= nf.last_name %>
+              <%= nf.handle %>
+            </p>
           <% end %>
-
-          <%= yield %>
         </div>
       </div>
     </div>

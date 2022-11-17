@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # dummy users
-(1..10).each do |user_id|
+(1..20).each do |user_id|
 	User.create!(
 		id: user_id,
 		email: Faker::Internet.email,
@@ -54,11 +54,33 @@ users = User.all
 
 # loop through users and add tweets
 users.each do |user|
+	
+	# generate tweets
 	(1..5).each do |i|
 		Tweet.create!(
 			user_id: user.id, 
 			body: Faker::Lorem.paragraph_by_chars(number: 200),
+			created_at: Faker::Time.between(from: DateTime.now - 30, to: DateTime.now, format: :default)
 		)
-	end 
+	end
+
+	# array of random numbers
+	follow_ids = 10.times.map { rand(1..11) }.uniq - [user.id]
+
+	# 5 times create a follower relation that is unique on follower_id
+	(1..5).each do |i|
+		Follow.find_or_create_by(
+			user_id: user.id,
+			follower_id: follow_ids.sample
+		)
+	end
+
 end
+
+
+
+
+
+
+
 

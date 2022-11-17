@@ -1,32 +1,11 @@
-<div class="container">
-	<div class="row">
-		<div class="col-3">
-			<div class="row user-info">
-				<%= current_user.first_name %> <%= current_user.last_name %><br />
-				<%= current_user.handle %>
-			</div>
-			<div class="row">
-				<ul class="sidenav">
-					<li><a href="#">Home</a></li>
-					<li><a href="/users/edit">Profile</a></li>
-					<li><a href="#">Explore</a></li>
-					<li><a href="#">Messages</a></li>
-					<li><a href="#">Bookmarks</a></li>
-				</ul>
-			</div>
+<div class="col-6">
+	<% @tweets.each do |tweet| %>
+		<div class="tweet">
+			<%= tweet.user.first_name %>
+			<%= tweet.user.last_name %>
+			<%= tweet.user.handle %>
+			<%= tweet.created_at %>
+			<p><%= tweet.body %></p>
 		</div>
-		<div class="col-6">
-			<% @tweets.each do |tweet| %>
-				<div class="tweet">
-					<%= tweet.user.first_name %>
-					<%= tweet.user.last_name %>
-					<%= tweet.user.handle %>
-					<p><%= tweet.body %></p>
-				</div>
-			<% end %>
-		</div>
-		<div class="col-3">
-			
-		</div>
-	</div>
+	<% end %>
 </div>
